@@ -30,7 +30,7 @@ type PersonType = {
 };
 ```
 
-## Use of `keyof` Keyword in TypeScript
+## 2. Use of `keyof` Keyword in TypeScript
 
 The `keyof` keyword is used to get a **union of all property names** of a type. It helps ensure **type safety** when accessing properties of an object dynamically.
 
@@ -59,7 +59,7 @@ const personAge = getProperty(person, "age");   // 26
 // const gender = getProperty(person, "gender"); // ❌ Error
 ```
 
-## Difference Between `any`, `unknown`, and `never` in TypeScript
+## 3. Difference Between `any`, `unknown`, and `never` in TypeScript
 
 TypeScript provides several special types that help handle different scenarios in type safety. Three commonly discussed types are **`any`**, **`unknown`**, and **`never`**.
 
@@ -80,7 +80,7 @@ value = "Hello";
 value.toFixed(); // No error, even if value is a string
 ```
 
-## Use of Enums in TypeScript
+## 4. Use of Enums in TypeScript
 
 Enums in TypeScript are a way of defining **named constants**. They help make code more **readable and maintainable** by giving meaningful names to sets of numeric or string values.
 
@@ -102,7 +102,7 @@ let move: Direction = Direction.Up;
 console.log(move); // Output: 0
 ```
 
-## Union and Intersection Types in TypeScript
+## 5. Union and Intersection Types in TypeScript
 
 TypeScript provides **union** and **intersection** types to combine multiple types in flexible ways.
 
