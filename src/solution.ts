@@ -10,7 +10,6 @@ const formatValue = (value: string | number | boolean): string | number| boolean
   }
 }
 
-
 const getLength = (value: string | any[]): number =>{
    if(typeof value === 'string'){
     return value.length;
@@ -27,16 +26,13 @@ class Person{
   age: number;
 
   constructor(name: string, age: number){
-    this.name = name,
+    this.name = name;
     this.age = age
   }
-  getDetails(){
+  getDetails(): string{
    return `Name: ${this.name}, Age: ${this.age}`
   }
 }
-
-const person1 = new Person('John Doe', 30);
-const person2 = new Person('Alice', 25);
 
 type Item = {
   title: string, 
@@ -65,26 +61,49 @@ interface Book{
  isAvailable: boolean,
 }
 
-const printBookDetails = (value: Book) =>{
-  console.log(`Title: ${value.title}, Author: ${value.author}, Published: ${value.publishedYear}, Available: ${value.isAvailable ? 'Yes' : 'No'}`)
+const printBookDetails = (value: Book): void =>{
+  console.log(`Title: ${value.title}, Author: ${value.author}, Published: ${value.publishedYear}, Available: ${value.isAvailable ? 'Yes' : 'No'}`);
 }
 
 
-const getUniqueValues = (array1: (string | number)[], array2:(string | number)[]): (string | number)[] =>{
-  const result: (string | number)[] = [];
 
-  for(let i = 0; i < array1.length; i++){
-    if(!result.includes(array1[i])){
-      result.push(array1[i])
+const getUniqueValues = (
+  array1: (string | number)[],
+  array2: (string | number)[]
+): (string | number)[] => {
+  
+  const result: (string | number)[] = [];
+  for (let i = 0; i < array1.length; i++) {
+
+    let exists = false;
+    for (let j = 0; j < result.length; j++) {
+      if (result[j] === array1[i]) {
+        exists = true;
+        break;
+      }
+    }
+
+    if (!exists) {
+      result[result.length] = array1[i]; 
     }
   }
-  for(let i = 0; i < array2.length; i++){
-    if(!result.includes(array2[i])){
-      result.push(array2[i])
+
+  for (let i = 0; i < array2.length; i++) {
+    let exists = false;
+    for (let j = 0; j < result.length; j++) {
+      if (result[j] === array2[i]) {
+        exists = true;
+        break;
+      }
+    }
+
+    if (!exists) {
+      result[result.length] = array2[i];
     }
   }
   return result;
-}
+};
+
 
 
 type Product = {
