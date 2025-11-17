@@ -1,22 +1,22 @@
-# TypeScript Blog Post
+# টাইপস্ক্রিপ্ট ব্লগ পোস্ট
 
-## 1. Differences Between Interfaces and Types
+## ১. Interfaces এবং Types-এর মধ্যে পার্থক্য
 
-In TypeScript, both **interfaces** and **types** are used to define the structure of objects, but there are some important differences:
+টাইপস্ক্রিপ্টে **interfaces** এবং **types** দুটোই অবজেক্টের গঠন (structure) নির্ধারণ করতে ব্যবহৃত হয়, কিন্তু এদের মধ্যে কিছু গুরুত্বপূর্ণ পার্থক্য রয়েছে:
 
-1. **Extending and Merging:**  
-   - An `interface` can be declared multiple times, and TypeScript will automatically merge them.  
-   - A `type` cannot be redeclared; doing so will cause an error.
+1. **Extending এবং Merging:**  
+   - একটি `interface` একাধিকবার ডিক্লেয়ার করা যায়, টাইপস্ক্রিপ্ট স্বয়ংক্রিয়ভাবে সেগুলোকে মার্জ করে দেবে।  
+   - একটি `type` পুনরায় ডিক্লেয়ার করলে এরর হবে।
 
-2. **Union and Intersection:**  
-   - `type` can be used to create **union** and **intersection** types.  
-   - `interface` is mainly used for defining object structures.
+2. **Union এবং Intersection:**  
+   - `type` দিয়ে **union** এবং **intersection** টাইপ তৈরি করা যায়।  
+   - `interface` মূলত অবজেক্টের গঠন নির্ধারণের জন্যই ব্যবহৃত হয়।
 
 3. **Implementation:**  
-   - `interface` can be implemented by classes using the `implements` keyword.  
-   - `type` cannot be implemented by classes.
+   - `interface` ক্লাস দিয়ে `implements` কীওয়ার্ড ব্যবহার করে ইমপ্লিমেন্ট করা যায়।  
+   - `type` ক্লাস দিয়ে ইমপ্লিমেন্ট করা যায় না।
 
-**Example:**
+**উদাহরণ:**
 
 ```ts
 interface PersonInterface {
@@ -30,9 +30,9 @@ type PersonType = {
 };
 ```
 
-## 2. Use of `keyof` Keyword in TypeScript
+## 2. TypeScript-এ keyof কীওয়ার্ডের ব্যবহার
 
-The `keyof` keyword is used to get a **union of all property names** of a type. It helps ensure **type safety** when accessing properties of an object dynamically.
+`keyof` কীওয়ার্ডটি কোনো টাইপের **সব প্রপার্টি নামের ইউনিয়ন** তৈরি করে। এটি ডাইনামিকভাবে অবজেক্টের প্রপার্টি অ্যাক্সেস করার সময় **টাইপ সেফটি** নিশ্চিত করে।
 
 ### Example
 
@@ -43,7 +43,7 @@ type Person = {
 };
 
 type PersonKeys = keyof Person;
-// PersonKeys is now "name" | "age"
+// PersonKeys এখন "name" | "age"
 
 function getProperty(obj: Person, key: PersonKeys) {
   return obj[key];
@@ -51,44 +51,43 @@ function getProperty(obj: Person, key: PersonKeys) {
 
 const person = { name: "Fatima", age: 26 };
 
-// Accessing properties safely using keyof
+// keyof ব্যবহার করে নিরাপদে প্রপার্টি অ্যাক্সেস
 const personName = getProperty(person, "name"); // "Fatima"
 const personAge = getProperty(person, "age");   // 26
 
-// The following would cause an error because "gender" is not a key of Person
+// নিচের লাইনটি এরর দেবে কারণ "gender" Person টাইপের কী নয়
 // const gender = getProperty(person, "gender"); // ❌ Error
 ```
 
-## 3. Difference Between `any`, `unknown`, and `never` in TypeScript
+## 3. `any`, `unknown`, এবং `never`-এর মধ্যে পার্থক্য
 
-TypeScript provides several special types that help handle different scenarios in type safety. Three commonly discussed types are **`any`**, **`unknown`**, and **`never`**.
-
+টাইপস্ক্রিপ্টে কিছু বিশেষ টাইপ রয়েছে যেগুলো বিভিন্ন পরিস্থিতিতে টাইপ সেফটি নিয়ন্ত্রণ করে। সবচেয়ে আলোচিত তিনটি হলো **`any`**, **`unknown`**, এবং **`never`**।
 ---
 
-### 1. `any` Type
+### 1. `any` টাইপ
 
-- `any` disables type checking.  
-- Variables of type `any` can be assigned **any value**, and you can perform **any operations** on them without compile-time errors.  
-- Using `any` is generally discouraged because it **removes type safety**.  
+- `any` টাইপ চেকিং সম্পূর্ণভাবে বন্ধ করে দেয়।  
+- `any` টাইপের ভেরিয়েবলে **যেকোনো মান** বসানো যায় এবং তার ওপর **যেকোনো অপারেশন** করা যায়, কম্পাইল-টাইম এরর ছাড়াই। 
+- `any` ব্যবহার সাধারণত **নিরুৎসাহিত** করা হয় কারণ এটি টাইপ সেফটি নষ্ট করে।  
 
-**Example:**
+**উদাহরণ:**
 
 ```ts
 let value: any;
 value = 42;
 value = "Hello";
-value.toFixed(); // No error, even if value is a string
+value.toFixed(); // কোনো এরর নেই, যদিও value এখন স্ট্রিং
 ```
 
-## 4. Use of Enums in TypeScript
+## 4. TypeScript-এ Enums-এর ব্যবহার
 
-Enums in TypeScript are a way of defining **named constants**. They help make code more **readable and maintainable** by giving meaningful names to sets of numeric or string values.
+Enums হলো **নামযুক্ত কনস্ট্যান্ট**-এর সেট নির্ধারণের একটি উপায়। এটি কোডকে আরো **পঠনযোগ্য এবং রক্ষণাবেক্ষণযোগ্য** করে।
 
 ---
 
-### 1. Numeric Enum
+### 1. নিউমেরিক Enum
 
-By default, enums are **numeric** and auto-incremented starting from 0.
+ডিফল্টভাবে enum **নিউমেরিক** হয় এবং ০ থেকে অটো-ইনক্রিমেন্ট হয়।
 
 ```ts
 enum Direction {
@@ -99,26 +98,26 @@ enum Direction {
 }
 
 let move: Direction = Direction.Up;
-console.log(move); // Output: 0
+console.log(move); // আউটপুট: 0
 ```
 
-## 5. Union and Intersection Types in TypeScript
+## 5. Union এবং Intersection Types TypeScript-এ
 
-TypeScript provides **union** and **intersection** types to combine multiple types in flexible ways.
+টাইপস্ক্রিপ্টে union এবং intersection টাইপের মাধ্যমে একাধিক টাইপকে নমনীয়ভাবে একত্রিত করা যায়।
 
 ---
 
 ### 1. Union Types
 
-A **union type** allows a variable to hold **more than one type**.  
-Use the `|` symbol to define a union.
+Union **টাইপ** একটি ভেরিয়েবলকে **একাধিক টাইপের** মান ধারণ করতে দেয়।
+`|` চিহ্ন ব্যবহার করে ইউনিয়ন তৈরি করা হয়।
 
-**Example:**
+**উদাহরণ:**
 
 ```ts
 let value: string | number;
 
-value = "Hello"; // ✅ valid
-value = 42;      // ✅ valid
-// value = true; // ❌ Error: boolean not allowed
+value = "Hello"; // ✅ বৈধ
+value = 42;      // ✅ বৈধ
+// value = true; // ❌ এরর: boolean অনুমোদিত নয়
 ```
